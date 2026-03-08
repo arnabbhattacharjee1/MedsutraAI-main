@@ -1,0 +1,31 @@
+{
+  "name": "patient-service-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function to fetch patient records from RDS PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "package": "npm install --production && zip -r patient-service.zip index.js node_modules package.json"
+  },
+  "keywords": [
+    "lambda",
+    "patient-service",
+    "rds",
+    "postgresql"
+  ],
+  "author": "AI Cancer Detection Team",
+  "license": "MIT",
+  "dependencies": {
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.11",
+    "aws-sdk-client-mock": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

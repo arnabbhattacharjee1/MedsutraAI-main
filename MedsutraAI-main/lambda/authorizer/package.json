@@ -1,0 +1,25 @@
+{
+  "name": "cognito-jwt-authorizer",
+  "version": "1.0.0",
+  "description": "Lambda authorizer for validating Cognito JWT tokens",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "package": "zip -r authorizer.zip index.js node_modules/"
+  },
+  "keywords": [
+    "lambda",
+    "authorizer",
+    "cognito",
+    "jwt"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

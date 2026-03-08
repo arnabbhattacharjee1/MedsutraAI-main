@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedSutra AI - AI-Powered Cancer Detection and Clinical Summarization Platform for Indian Healthcare">
+    <title>MedSutra AI - Cancer Detection Platform</title>
+    <style>
+        :root {
+            --navy: #0B131D;
+            --blue: #2563EB;
+            --cyan: #AFE6DE;
+            --green: #C7E1B8;
+            --yellow: #E7F3B5;
+            --pink: #D9B7DA;
+            --orange: #FBD7B3;
+            --off-white: #E2E8F0;
+            --card-bg: #1E293B;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--navy);
+            color: var(--off-white);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--navy), #1a2332);
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--cyan);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(175, 230, 222, 0.1), rgba(199, 225, 184, 0.1));
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            color: var(--navy);
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(199, 225, 184, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(199, 225, 184, 0.6);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+        }
+
+        .feature-card h3 {
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .chat-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            background: var(--navy);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--blue), #1e40af);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .ai-message {
+            background: var(--card-bg);
+            border: 1px solid var(--cyan);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: var(--navy);
+            color: var(--off-white);
+            font-size: 1rem;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            color: var(--navy);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+            color: var(--cyan);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        footer {
+            background: var(--card-bg);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 2px solid var(--cyan);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MedSutra AI</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#chat">Try AI</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>AI-Powered Cancer Detection</h1>
+            <p>🇮🇳 Made in India, For India</p>
+            <p>Empowering oncologists and patients with explainable AI-driven clinical insights</p>
+            <button class="cta-button" onclick="scrollToChat()">Try AI Assistant</button>
+        </section>
+
+        <section id="features" class="features">
+            <article class="feature-card">
+                <h3>🔬 Clinical Summarization</h3>
+                <p>AI-powered analysis of medical reports, lab results, and imaging studies to generate comprehensive patient summaries.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>🎯 Cancer Risk Assessment</h3>
+                <p>Advanced algorithms analyze patient data to identify cancer risk indicators with explainable confidence scores.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>🌐 Multilingual Support</h3>
+                <p>Available in 10 Indian languages including Hindi, Tamil, Telugu, Bengali, Marathi, and more.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>🔒 HIPAA & DPDP Compliant</h3>
+                <p>Enterprise-grade security with encryption at rest and in transit. Fully compliant with healthcare regulations.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>🎤 Voice Interaction</h3>
+                <p>Hands-free operation with voice commands and audio feedback for enhanced accessibility.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>📊 Explainable AI</h3>
+                <p>Transparent reasoning with step-by-step explanations and evidence citations for every AI decision.</p>
+            </article>
+        </section>
+
+        <section id="chat" class="chat-section">
+            <h2 style="color: var(--cyan); margin-bottom: 1rem;">Try Our AI Assistant</h2>
+            <p style="margin-bottom: 1rem; opacity: 0.8;">Ask questions about cancer detection, treatment options, or clinical guidelines.</p>
+            
+            <div class="chat-container" id="chatContainer">
+                <div class="message ai-message">
+                    <strong>MedSutra AI:</strong> Hello! I'm your AI medical assistant. I can help answer questions about cancer detection, treatment options, and clinical guidelines. How can I assist you today?
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <p>🤖 AI is thinking...</p>
+            </div>
+
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    class="chat-input" 
+                    id="chatInput" 
+                    placeholder="Ask a question about cancer detection or treatment..."
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button class="send-button" id="sendButton" onclick="sendMessage()">Send</button>
+            </div>
+        </section>
+
+        <section id="about" style="background: var(--card-bg); padding: 2rem; border-radius: 15px; border: 1px solid var(--border);">
+            <h2 style="color: var(--cyan); margin-bottom: 1rem;">About MedSutra AI</h2>
+            <p style="margin-bottom: 1rem;">MedSutra AI is an advanced cancer detection and clinical summarization platform designed specifically for the Indian healthcare ecosystem. Our platform leverages cutting-edge AI technology from Amazon Bedrock to provide oncologists and healthcare providers with actionable insights.</p>
+            
+            <h3 style="color: var(--green); margin-top: 2rem; margin-bottom: 1rem;">Key Benefits:</h3>
+            <ul style="list-style-position: inside; line-height: 2;">
+                <li>✅ Reduces clinical documentation time by 70%</li>
+                <li>✅ Improves diagnostic accuracy with AI-powered insights</li>
+                <li>✅ Supports 10 Indian languages for better patient communication</li>
+                <li>✅ ABDM-aligned for seamless health information exchange</li>
+                <li>✅ Explainable AI ensures transparency and trust</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MedSutra AI Platform. Made with ❤️ in India.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Powered by Amazon Bedrock | HIPAA Compliant | DPDP Act Compliant</p>
+    </footer>
+
+    <script>
+        const API_ENDPOINT = 'YOUR_API_GATEWAY_URL'; // Will be replaced with actual API Gateway URL
+        let conversationHistory = [];
+
+        function scrollToChat() {
+            document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('chatInput').focus();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Disable input while processing
+            input.disabled = true;
+            document.getElementById('sendButton').disabled = true;
+            document.getElementById('loading').classList.add('show');
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'user',
+                content: message,
+                timestamp: new Date().toISOString()
+            });
+
+            try {
+                // Call AWS Lambda via API Gateway
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        conversation_history: conversationHistory
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+
+                const data = await response.json();
+                
+                // Add AI response to chat
+                addMessage(data.response, 'ai');
+
+                // Add to conversation history
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: data.response,
+                    timestamp: new Date().toISOString()
+                });
+
+                // Save conversation to localStorage
+                saveConversation();
+
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'ai');
+            } finally {
+                // Re-enable input
+                input.disabled = false;
+                document.getElementById('sendButton').disabled = false;
+                document.getElementById('loading').classList.remove('show');
+                input.focus();
+            }
+        }
+
+        function addMessage(text, type) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            
+            const label = type === 'user' ? 'You' : 'MedSutra AI';
+            messageDiv.innerHTML = `<strong>${label}:</strong> ${text}`;
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function saveConversation() {
+            try {
+                localStorage.setItem('medsutra_conversation', JSON.stringify(conversationHistory));
+            } catch (error) {
+                console.error('Error saving conversation:', error);
+            }
+        }
+
+        function loadConversation() {
+            try {
+                const saved = localStorage.getItem('medsutra_conversation');
+                if (saved) {
+                    conversationHistory = JSON.parse(saved);
+                    // Optionally restore chat UI
+                }
+            } catch (error) {
+                console.error('Error loading conversation:', error);
+            }
+        }
+
+        // Load conversation on page load
+        window.addEventListener('DOMContentLoaded', loadConversation);
+    </script>
+</body>
+</html>

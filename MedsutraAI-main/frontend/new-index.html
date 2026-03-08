@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedSutra AI - Advanced AI-Powered Cancer Detection Platform">
+    <title>MedSutra AI - Clinical Intelligence Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🏥</span>
+                    <span class="logo-text">MedSutra AI</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#patients">Patients</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#ai-assistant">AI Assistant</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn-secondary" id="languageBtn">🌐 English</button>
+                    <div class="user-info" id="userInfo">
+                        <div class="user-avatar">👤</div>
+                        <div class="user-details">
+                            <div class="user-name" id="userName"></div>
+                            <div class="user-role" id="userRole"></div>
+                        </div>
+                        <button class="btn-icon" onclick="logout()">🚪</button>
+                    </div>
+                    <button class="btn-primary" id="loginBtn" onclick="showLogin()">Login</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Patient Dashboard (Hidden until login) -->
+        <section class="patient-dashboard" id="patientDashboard">
+            <div class="dashboard-header">
+                <h2>Patient Dashboard</h2>
+                <div class="dashboard-actions">
+                    <button class="btn-secondary" onclick="refreshDashboard()">🔄 Refresh</button>
+                    <button class="btn-secondary" onclick="addPatient()">➕ Add Patient</button>
+                </div>
+            </div>
+            <div class="patients-grid" id="patientsGrid">
+                <!-- Patient tiles will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section class="hero" id="heroSection">
+            <div class="hero-content">
+                <h1 class="hero-title">AI-Powered Clinical Intelligence</h1>
+                <p class="hero-subtitle">Transforming cancer detection and treatment planning with explainable AI</p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">70%</div>
+                        <div class="stat-label">Time Saved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">10+</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-large btn-primary" onclick="scrollTo('#ai-assistant')">Try AI Assistant</button>
+                    <button class="btn-large btn-outline">Watch Demo</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- AI Assistant Section -->
+        <section class="ai-section" id="ai-assistant" style="display: none;">
+            <h2 class="section-title">AI Clinical Assistant</h2>
+            <div class="ai-container">
+                <div class="chat-panel">
+                    <div class="chat-header">
+                        <div class="chat-status">
+                            <span class="status-indicator"></span>
+                            <span>AI Assistant Active</span>
+                        </div>
+                        <button class="btn-icon" onclick="clearChat()">🗑️</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <strong>MedSutra AI</strong>
+                                <p>Hello! I'm your AI clinical assistant. I can help with cancer detection analysis, treatment planning, and clinical documentation. How can I assist you today?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about cancer detection, treatment options..." />
+                        <button class="btn-icon btn-send" onclick="sendMessage()">📤</button>
+                        <button class="btn-icon" onclick="startVoice()">🎤</button>
+                    </div>
+                </div>
+                <div class="info-panel">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="askQuestion('Analyze radiology report')">📋 Analyze Report</button>
+                        <button class="action-btn" onclick="askQuestion('Cancer risk assessment')">🎯 Risk Assessment</button>
+                        <button class="action-btn" onclick="askQuestion('Treatment options')">💊 Treatment Options</button>
+                        <button class="action-btn" onclick="askQuestion('Clinical guidelines')">📚 Guidelines</button>
+                    </div>
+                    <h3>Recent Insights</h3>
+                    <div class="insights-list">
+                        <div class="insight-item">
+                            <span class="insight-icon">✅</span>
+                            <span>3 reports analyzed today</span>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-icon">⚠️</span>
+                            <span>2 high-priority cases</span>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-icon">📊</span>
+                            <span>95% accuracy rate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MedSutra AI</h4>
+                    <p>AI-powered clinical intelligence for Indian healthcare</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Compliance</h4>
+                    <ul>
+                        <li>HIPAA Compliant</li>
+                        <li>DPDP Act Compliant</li>
+                        <li>ABDM Aligned</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@medsutra.ai</p>
+                    <p>Made with ❤️ in India</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MedSutra AI. Powered by Amazon Bedrock.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeLogin()">✕</button>
+            <h2 class="modal-title">Login to MedSutra AI</h2>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="userId">User ID</label>
+                    <input type="text" id="userId" class="form-input" placeholder="Enter user ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <input type="text" id="role" class="form-input" placeholder="Enter role" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Patient Report Modal -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content report-modal-content">
+            <button class="modal-close" onclick="closeReport()">✕</button>
+            <div id="reportContent">
+                <!-- Report content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

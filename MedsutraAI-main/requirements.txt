@@ -1,0 +1,9 @@
+# Core dependencies
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dateutil>=2.8.0
+typing-extensions>=4.5.0
+
+# HTTP client for FHIR integration
+requests>=2.31.0
+urllib3>=2.0.0

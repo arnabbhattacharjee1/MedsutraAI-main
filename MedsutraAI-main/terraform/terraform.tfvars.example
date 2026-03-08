@@ -1,0 +1,28 @@
+# Example Terraform Variables File
+# Copy this file to terraform.tfvars and update with your values
+# IMPORTANT: Never commit terraform.tfvars to version control
+
+# AWS Configuration
+aws_region  = "ap-south-1"
+environment = "production"
+
+# RDS Configuration
+# CRITICAL: Set a strong password for RDS master user
+# Password requirements:
+# - At least 8 characters
+# - Must contain uppercase, lowercase, numbers
+# - Cannot contain /, ", or @
+rds_master_password = "CHANGE_ME_TO_STRONG_PASSWORD"
+
+# Optional: Override default RDS settings
+# rds_instance_class = "db.r6g.xlarge"
+# rds_allocated_storage = 100
+# rds_multi_az = true
+# rds_create_read_replicas = true
+# rds_deletion_protection = true
+
+# For development/testing environments, you may want to:
+# rds_skip_final_snapshot = true
+# rds_deletion_protection = false
+# rds_multi_az = false
+# rds_create_read_replicas = false

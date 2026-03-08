@@ -1,0 +1,40 @@
+version: 0.2
+
+# AWS CodeBuild buildspec for MedSutra AI Frontend
+# This file enables CI/CD deployment to S3
+
+phases:
+  pre_build:
+    commands:
+      - echo "Starting build process..."
+      - echo "Build started on `date`"
+      
+  build:
+    commands:
+      - echo "No build step required for static site"
+      - echo "Validating files..."
+      - ls -la
+      
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+      - echo "Deploying to S3..."
+      - aws s3 sync . s3://${S3_BUCKET}/ --exclude "*.md" --exclude "*.sh" --exclude "*.ps1" --exclude "buildspec.yml" --delete
+      - aws s3 cp s3://${S3_BUCKET}/index.html s3://${S3_BUCKET}/index.html --content-type "text/html" --metadata-directive REPLACE --cache-control "max-age=300"
+      - aws s3 cp s3://${S3_BUCKET}/styles.css s3://${S3_BUCKET}/styles.css --content-type "text/css" --metadata-directive REPLACE --cache-control "max-age=86400"
+      - aws s3 cp s3://${S3_BUCKET}/app.js s3://${S3_BUCKET}/app.js --content-type "application/javascript" --metadata-directive REPLACE --cache-control "max-age=86400"
+      - |
+        if [ ! -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+          echo "Invalidating CloudFront cache..."
+          aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
+        fi
+      - echo "Deployment complete!"
+
+artifacts:
+  files:
+    - '**/*'
+  name: medsutra-frontend-$(date +%Y%m%d-%H%M%S)
+
+cache:
+  paths:
+    - 'node_modules/**/*'

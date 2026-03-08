@@ -1,0 +1,34 @@
+# MVP Terraform Variables File
+# Simplified configuration for MVP deployment
+# Copy this to terraform.tfvars for MVP deployment
+
+# AWS Configuration
+aws_region  = "ap-south-1"
+environment = "mvp"
+
+# Project Configuration
+project_name = "ai-cancer-detection"
+
+# RDS Configuration - MVP Simplified
+# CRITICAL: Set a strong password for RDS master user
+# Password requirements:
+# - At least 8 characters
+# - Must contain uppercase, lowercase, numbers
+# - Cannot contain /, ", or @
+rds_master_password = "CHANGE_ME_TO_STRONG_PASSWORD"
+
+# MVP Simplifications:
+# - Single instance (no read replicas)
+# - Single AZ (no Multi-AZ for cost savings)
+# - Smaller instance class for MVP
+# - Deletion protection disabled for easier cleanup
+rds_instance_class = "db.t4g.large"  # 2 vCPU, 8 GB RAM - sufficient for MVP
+rds_allocated_storage = 50  # 50 GB initial storage
+rds_max_allocated_storage = 200  # Max 200 GB autoscaling
+rds_multi_az = false  # Single AZ for MVP
+rds_create_read_replicas = false  # No read replicas for MVP
+rds_skip_final_snapshot = true  # Allow easy cleanup for MVP
+rds_deletion_protection = false  # Allow deletion for MVP testing
+
+# Note: For production deployment, use terraform.tfvars.example as template
+# and enable Multi-AZ, read replicas, and deletion protection
